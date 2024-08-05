@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import './App.css'
 import Home from './Pages/Home'
+import Layout from './Layouts/Layout'
 
 function App() {
 
   return (
-   <div className='text-yellow-800'>
-    <Home />
+   <div>
+     <Layout>
+      <Home />
+      </Layout>
+    
    </div>
   )
 }
