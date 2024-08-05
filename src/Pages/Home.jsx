@@ -1,5 +1,6 @@
 import IconArrowRight from "../Components/Icons/ArrowRight"
 
+import PizzaImage from "../assets/Images/pizza1.png"
 function Home(){
     return (
         <div>
@@ -22,12 +23,18 @@ function Home(){
                             Enjoy the best pizza in town with just a few clicks.
                          </p>
                         <button
-                            className=" flex items-center px-4 py-2 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 group">
+                            className=" flex items-center px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-orange-600 group">
                             Order Now 
                             <span className="inline-block ml-3  trasition-transform ease-in-out group-hover:translate-x-2">
                                   <IconArrowRight  />
                             </span>
                         </button>
+                    </div>
+                    <div>
+                        <img src={PizzaImage} 
+                        alt="Pizza"
+                        width={550}
+                        height={550} />
                     </div>
 
             </section>
