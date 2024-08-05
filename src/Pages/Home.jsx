@@ -1,4 +1,5 @@
 import IconArrowRight from "../Components/Icons/ArrowRight";
+import Layout from '../Layouts/Layout'
 
 import PizzaImage from "../assets/Images/pizza1.png";
 import cookingImage from "../assets/Images/Cook1.png"
@@ -8,6 +9,7 @@ import FoodEnjoyIcon from "../assets/Images/foodEnjoy.png"
 import FoodPickIcon from "../assets/Images/foodPickup.png"
 function Home(){
     return (
+        <Layout>
         <div>
             {/*Hero section */}
             <section
@@ -155,6 +157,7 @@ function Home(){
             </section>
             
         </div>
+    </Layout>
     )
 }
 
