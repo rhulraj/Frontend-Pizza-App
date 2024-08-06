@@ -1,0 +1,102 @@
+import Layout from "../../Layouts/Layout"
+
+function AddProduct(){
+    return(
+      <Layout>
+        <section className="py-12">
+            <div className="max-w-md mx-auto mt-8 bg-white p-7">
+                <h2 className="mb-4 text-2xl font-semibold">
+                    Add product
+                </h2>
+
+                <form >
+                    <div className="mb-4">
+                    <label htmlFor="productName" className="block text-sm font-medium text-gray-700">Product Name<span className="text-red-500">*</span></label>
+                            
+                            <input
+                            type="text" 
+                            id="productName" 
+                            name="productName"
+                            onChange
+                            required
+                            minLength={5}
+                            maxLength={20}
+                            placeholder="Enter your Product Name"
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
+                    </div>
+                    <div className="mb-4">
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description<span className="text-red-500">*</span></label>
+                            
+                            <input
+                            type="text" 
+                            id="description" 
+                            name="description"
+                            onChange
+                            required
+                            minLength={5}
+                            maxLength={20}
+                            placeholder="Enter your Product Name"
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
+                    </div>
+                    <div className="mb-4">
+                    <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price<span className="text-red-500">*</span></label>
+                            
+                            <input
+                            type="number" 
+                            id="price" 
+                            name="price"
+                            onChange
+                            required
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
+                    </div>
+                    <div className="mb-4">
+                    <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Quantity<span className="text-red-500">*</span></label>
+                            
+                            <input
+                            type="number" 
+                            id="quantity" 
+                            name="quantity"
+                            onChange
+                            required
+                            placeholder="Enter your Product Name"
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
+                    </div>
+                    <div className="mb-2">
+                    <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Select Category<span className="text-red-500">*</span></label>
+                    <select 
+                    name="category" 
+                    id="category"
+                    className="mt-1 p-2 w-full boder border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    >
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-Vegetarian</option>
+                        <option value="drinks">Soft Drinks</option>
+                        <option value="sides">Sides</option>
+                    </select>
+                    </div>
+
+                    {/*Image */}
+                    <div className="mb-4">
+                    <label htmlFor="productImage" className="block text-sm font-medium text-gray-700">Image<span className="text-red-500">(.jpg, .jpeg, .png)</span></label>
+                    <input
+                            type="file" 
+                            id="productImage" 
+                            name="productImage"
+                            accept=".jpg, .jpeg, .png"
+                            onChange
+                            required
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
+                    </div>
+                    <button
+                    type="submit"
+                     className="w-full bg-yellow-500 text-white p-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-opacity-50 transition duration-300 ease-in-out">
+                        Add Product
+                    </button>
+                </form>
+            </div>
+
+        </section>
+      </Layout>
+    )
+}
+export default AddProduct

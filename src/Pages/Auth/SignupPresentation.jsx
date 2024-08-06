@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function SignPresentation(handleFormSubmit,handleUserInput){
+function SignPresentation({handleUserInput,handleFormSubmit}){
     return(
         <>
            <section className="text-gray-600 body-font">

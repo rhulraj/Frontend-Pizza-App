@@ -24,7 +24,7 @@ const [signUpState, setSignUpState] = useState({
     console.log(signUpState)
 
     //Add validation for the form input
-    if(!signUpState.email || !signUpState.mobileNumber || !signUpState.password || signUpState.firstName){
+    if(!signUpState.email || !signUpState.mobileNumber || !signUpState.password || !signUpState.firstName){
         toast.error("Missing values from the form")
         return;
     }
