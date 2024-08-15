@@ -143,7 +143,7 @@ function Login() {
                 </svg>
               </div>
                 <form className="flex flex-col w-full p-8 mt-10 bg-gray-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0" action="">
-                     <h2 className="mb-5 text-lg font-meduim text-gray-900 title-font">Sign up</h2>
+                     <h2 className="mb-5 text-lg font-meduim text-gray-900 title-font">Sign in</h2>
                   
                      <div className="relative mb-4">
                          <label htmlFor="email" className="text-sm leading-7 text-gray-600">Email<span className="text-red-500">*</span></label>
