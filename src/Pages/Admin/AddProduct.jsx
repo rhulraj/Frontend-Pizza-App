@@ -1,107 +1,62 @@
-import Layout from "../../Layouts/Layout"
-import Food from "../../assets/Images/Food.svg"
-function AddProduct(){
+import { useState } from "react";
+import AddProductPresentation from "./AddProductPresentation";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { createProducts } from "../../Redux/Slices/ProductSlice";
+
+
+function AddProduct() {
+    
+    const[ isAdmin, setIsAdmin ] = useState(false)
+    const role = useSelector((state) => state.auth.role)
+    
+    if(role === "ADMIN"){
+       setIsAdmin(true)
+    }
+    const dispatch =useDispatch()
+
+    const [productState, setProduct] =useState({
+        productName: "",
+        description: "",
+        productImage: "",
+        price: '',
+        category :"",
+        quantity:"",
+    })
+    function handleUserInput(e){
+        const {name, value} = e.target
+      setProduct({
+          ...productState,
+          [name]: value
+      })
+        
+       
+    }
+
+    async function handleUserSubmit(e){
+        e.preventDefault()
+        console.log(productState)
+
+        if(!productState.productName || !productState.description || !productState.price ||  !productState.quantity){
+            toast.error("Missing values from the form")
+            return;
+        }
+        console.log(productState.productName.length);
+        console.log(productState.description.length)
+        if(productState.productName.length < 5 || productState.description.length < 5 ){
+            toast.error("Product name and description should be 5 characters");
+            return
+        }
+
+        const apiResponse = await dispatch(createProducts(productState))
+        console.log(apiResponse);
+    }
+    
     return(
-      <Layout>
-        <section className="py-12">
-            <div className="flex items-center justify-center px-5">
-                    <div className="md:2/6">
-                       <img src={Food} alt="food" />
-                    </div>
-                
-                <div className="max-w-md md:w-4/6 mx-auto mt-8 bg-white p-4">
-                    <h2 className="mb-4 text-2xl font-semibold">
-                        Add product
-                    </h2>
-
-                    <form >
-                        <div className="mb-4">
-                        <label htmlFor="productName" className="block text-sm font-medium text-gray-700">Product Name<span className="text-red-500">*</span></label>
-                                
-                                <input
-                                type="text" 
-                                id="productName" 
-                                name="productName"
-                                onChange
-                                required
-                                minLength={5}
-                                maxLength={20}
-                                placeholder="Enter your Product Name"
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                        <div className="mb-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description<span className="text-red-500">*</span></label>
-                                
-                                <input
-                                type="text" 
-                                id="description" 
-                                name="description"
-                                onChange
-                                required
-                                minLength={5}
-                                maxLength={20}
-                                placeholder="Enter your Product Name"
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                        <div className="mb-4">
-                        <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price<span className="text-red-500">*</span></label>
-                                
-                                <input
-                                type="number" 
-                                id="price" 
-                                name="price"
-                                onChange
-                                required
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                        <div className="mb-4">
-                        <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Quantity<span className="text-red-500">*</span></label>
-                                
-                                <input
-                                type="number" 
-                                id="quantity" 
-                                name="quantity"
-                                onChange
-                                required
-                                placeholder="Enter your Product Name"
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                        <div className="mb-2">
-                        <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Select Category<span className="text-red-500">*</span></label>
-                        <select 
-                        name="category" 
-                        id="category"
-                        className="mt-1 p-2 w-full boder border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        >
-                            <option value="veg">Vegetarian</option>
-                            <option value="non-veg">Non-Vegetarian</option>
-                            <option value="drinks">Soft Drinks</option>
-                            <option value="sides">Sides</option>
-                        </select>
-                        </div>
-
-                        {/*Image */}
-                        <div className="mb-4">
-                        <label htmlFor="productImage" className="block text-sm font-medium text-gray-700">Image<span className="text-red-500">(.jpg, .jpeg, .png)</span></label>
-                        <input
-                                type="file" 
-                                id="productImage" 
-                                name="productImage"
-                                accept=".jpg, .jpeg, .png"
-                                onChange
-                                required
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md focus-outline-none focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                        <button
-                        type="submit"
-                        className="w-full bg-yellow-500 text-white p-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-opacity-50 transition duration-300 ease-in-out">
-                            Add Product
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-      </Layout>
+        <>
+        <AddProductPresentation handleUserInput ={handleUserInput} handleUserSubmit ={handleUserSubmit} isAdmin={isAdmin}/>
+        </>
     )
 }
+
 export default AddProduct

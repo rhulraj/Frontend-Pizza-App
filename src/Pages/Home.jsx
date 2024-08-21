@@ -7,7 +7,22 @@ import IconPatchCheck from "../Components/Icons/IconPatchCheck";
 import OrderFoodIcon from "../assets/Images/orderFood1.png"
 import FoodEnjoyIcon from "../assets/Images/foodEnjoy.png"
 import FoodPickIcon from "../assets/Images/foodPickup.png"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../Redux/Slices/ProductSlice";
+import { Link } from "react-router-dom";
 function Home(){
+
+    const dispatch = useDispatch();
+
+    const {productData} = useSelector((state)=> state.Products)
+    console.log(productData)
+   
+
+    useEffect(() =>{
+        //This is called when components mounts
+        dispatch(getAllProducts());
+    },[])
     return (
         <Layout>
         <div>
@@ -156,6 +171,38 @@ function Home(){
 
             </section>
             
+            { productData && productData.map((product) => <div key={product.id}>{product.productName}</div>)}
+            <div className="mx-auto">
+                <div className="flex flex-wrap justify-center">
+                    {productData.map((item, key)=> {
+                        return (
+                            item.inStock && (
+                            <div className="p-4 md:w-1/3" key={item.id}>
+                                <Link to={`/product/${item._id}`}>
+                                <div className="overflow-hidden border rounded-lg border-opacity-60">
+                                    <img src={item.productImage} className="object-cover object-center w-full lg:h-48 md:h-36" alt="Pizza Image" />
+                                    <div className="p-6 border">
+                                        <h2 className="mb-3 text-xs font-medium tracking-widest
+                                        text-gray-400 title-font ">
+                                            {item.category}
+                                        </h2>
+                                        <h1 className="mb-3 text-lg font-mediumtext-gray-900 title-font">
+                                            {item.productName}
+                                        </h1>
+                                        <p className="mb-4 text-base leading-relaxed">
+                                            {item.description}
+                                        </p>
+                                        <p className="text-lg font-medium text-gray-900 title-font">
+                                            ${item.price}
+                                        </p>
+                                    </div>
+                                    </div></Link>
+                            </div>
+                            )
+                        )
+                    })}
+                </div>
+            </div>
         </div>
     </Layout>
     )
