@@ -4,21 +4,36 @@ import Footer from '../Components/Footer'
 import cartIcon from '../assets/Images/cart.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../Redux/Slices/AuthSlice'
+import { useEffect } from 'react'
+import { getCartDetails } from '../Redux/Slices/CartSlices'
+
 
 function Layout({children}){
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const {cartData} = useSelector((state) => state.cart);
-   
-
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+ 
     async function handleLogout(e){
         e.preventDefault();
-        dispatch(logout())
-
+        dispatch(logout());
     }
+
+    async function fetchCartdetails(){
+        const res = await dispatch(getCartDetails());
+        if(res?.payload?.isUnauthorized) {
+            dispatch(logout());
+        }
+        console.log(res);
+    }
+    useEffect(()=>{
+       if(isLoggedIn) {
+        fetchCartdetails();
+       }
+    },[])
     return (
         <div>
 

@@ -3,7 +3,7 @@ import axiosInstanse from "../../Helpers/axiosInstance";
 import toast from "react-hot-toast";
 
 const initialState ={
-    cartData: ''
+    cartData: []
 }
 export const addProductToCart = createAsyncThunk('/cart/addProducts', async (productId) =>{
     try {        
@@ -37,7 +37,7 @@ export const removeProductToCart = createAsyncThunk('/cart/removeProducts', asyn
      }
 })
 
-export const getCartDetails = createAsyncThunk('/cart/getDetails', async (productId) =>{
+export const getCartDetails = createAsyncThunk('/cart/getDetails', async () =>{
     try {        
         const response =   axiosInstanse.get(`/carts`);
         console.log(response)
@@ -51,7 +51,7 @@ export const getCartDetails = createAsyncThunk('/cart/getDetails', async (produc
      } catch(error) {
         console.log(error)
      }
-})
+});
 
 const cartSlice = createSlice({
     name: "cart",

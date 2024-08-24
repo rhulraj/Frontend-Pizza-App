@@ -9,7 +9,8 @@ function CartDetails() {
 
     const [cartDetails, setCartDetails] = useState();
     const dispatch = useDispatch();
-    const [cartData] = useSelector((state) => state.cart);
+    const {cartData} = useSelector((state) => state.cart);
+    
     const [qauntity, setQuatity] = useState([])
     
     function changeQuantity ( ){
@@ -20,7 +21,7 @@ function CartDetails() {
             ])
         })
     }
-    console.log(qauntity)
+ 
 
     async function fetchCartDetails(){
         const details = await dispatch(getCartDetails());
@@ -40,7 +41,7 @@ function CartDetails() {
 
     useEffect(()=>{
         fetchCartDetails()
-    },[cartData.items.length,  qauntity]);
+    },[  qauntity]);
 
     return (
         <Layout>

@@ -9,6 +9,9 @@ import Denied from './Pages/Auth/Denied'
 import AddProduct from './Pages/Admin/AddProduct'
 import ProductDetails from './Pages/Products/ProductDetails'
 import CartDetails from './Pages/Cart/CartDetails'
+import Order from './Pages/Order/Order'
+import OrderSuccess from './Pages/Order/OrderSuccess'
+import RequireAuth from './Components/Auths/RequireAuth'
 
 function App() {
 
@@ -21,7 +24,11 @@ function App() {
       <Route path='/auth/login' element ={<Login />} />
       <Route path='/admin/addproduct' element= {<AddProduct />} />
       <Route path='/product/:productId' element ={<ProductDetails />} />
-      <Route path='/cart' element = {<CartDetails />} />
+      <Route element={<RequireAuth />}>
+          <Route path='/cart' element = {<CartDetails />} />
+          <Route path='/order' element ={<Order />} />
+          <Route path='/order/success' element = {<OrderSuccess />} /> 
+      </Route>
       <Route path='*' element ={<NotFound />} />
     </Routes>
     
